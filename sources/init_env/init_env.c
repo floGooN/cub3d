@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:20:33 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/19 18:29:45 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:22:39 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	close_win(t_map_data *map, int key_code)
 static int	key_hook(int keycode, t_map_data *map)
 {
 	if (keycode == XK_Escape)
-		return (free_all(map), 0);
+		return (mlx_loop_end(map->console.mlx_ptr));
 	return (0);
 }
 
@@ -57,4 +57,3 @@ int	init_env(t_map_data *map)
 	mlx_loop(map->console.mlx_ptr);
 	return (0);
 }
-
