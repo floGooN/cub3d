@@ -6,7 +6,7 @@
 /*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:20:33 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/22 17:30:15 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:43:44 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	put_square(t_map_data *map, int color, int y, int x)
 {
 	for (int i = 0; i < map->cell_height; i++)
 	{
-
 		mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, x * map->cell_width + i, y * map->cell_height, color);
 		for (int j = 0; j < map->cell_width; j++){
 			mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, x * map->cell_width + i, y * map->cell_height + j, color);

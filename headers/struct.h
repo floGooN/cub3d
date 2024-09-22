@@ -6,7 +6,7 @@
 /*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:24:49 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/22 12:43:50 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:45:04 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 	typedef struct	s_console
 	{
-		void			*mlx_ptr;
-		void			*win_ptr;
-		int	win_width;
-		int	win_height;
+		void	*mlx_ptr;
+		void	*win_ptr;
+		int		win_width;
+		int		win_height;
 	}	t_console;
 
 	typedef struct	s_texture_path
@@ -51,8 +51,8 @@
 		char        **map;
 		unsigned	cell_width;
 		unsigned	cell_height;
-        unsigned	p_x;
-		unsigned	p_y;
+        double		player_x;
+		double		player_y;
 		t_img_data  img;
 		t_colors    colors;
 		t_console   console;
