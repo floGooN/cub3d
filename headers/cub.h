@@ -6,7 +6,7 @@
 /*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/19 18:29:19 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/19 19:51:07 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 	# include <stdio.h>
 	# include <stdlib.h>
 	# include <string.h>
+	# include <math.h>
 
 	/*==== main/utils.c ====*/
 	void	ft_perror(char *err_message);
