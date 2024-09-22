@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:24:49 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/21 17:39:59 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/22 12:43:50 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 	{
 		void			*mlx_ptr;
 		void			*win_ptr;
-		unsigned int	win_width;
-		unsigned int	win_height;
+		int	win_width;
+		int	win_height;
 	}	t_console;
 
 	typedef struct	s_texture_path
@@ -49,10 +49,15 @@
 	typedef struct	s_map_data
 	{
 		char        **map;
-        t_img_data  img;
+		unsigned	cell_width;
+		unsigned	cell_height;
+        unsigned	p_x;
+		unsigned	p_y;
+		t_img_data  img;
 		t_colors    colors;
 		t_console   console;
 		t_textures  text_path;
+
 	}	t_map_data ;
 
 #endif

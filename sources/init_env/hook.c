@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 12:52:49 by florian           #+#    #+#             */
-/*   Updated: 2024/09/21 12:54:38 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/22 12:20:14 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	key_hook(int keycode, t_map_data *map)
 void	hook_management(t_map_data *map)
 {
 	mlx_hook(map->console.win_ptr, DestroyNotify, StructureNotifyMask, \
-														&close_win, map);
+														close_win, map);
 	mlx_key_hook(map->console.win_ptr, key_hook, map);
 	return ;
 }

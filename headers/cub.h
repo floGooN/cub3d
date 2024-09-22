@@ -6,7 +6,7 @@
 /*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/22 09:47:03 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:43:05 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 	# include <string.h>
 	# include <math.h>
 
+	#define WIN_WIDTH 2300
+	#define WIN_HEIGHT 1500
     #define PI 3.14159265359
 
 	/*==== main/utils.c ====*/

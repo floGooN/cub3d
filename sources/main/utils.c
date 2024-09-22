@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:47:23 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/21 16:55:38 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/22 09:48:32 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void    free_console(t_map_data *map)
     mlx_destroy_window(map->console.mlx_ptr, map->console.win_ptr);
     mlx_destroy_display(map->console.mlx_ptr);
     free(map->console.mlx_ptr);
-    map->console.mlx_ptr = NULL ;
     return ;
 }
 

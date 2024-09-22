@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2'0',24/'0',9/18 11:12:29 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/20 11:42:42 by florian          ###   ########.fr       */
+/*   Created: 2024/09/22 18:21:21 by fberthou          #+#    #+#             */
+/*   Updated: 2024/09/22 18:29:00 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "cub.h"
 
@@ -37,6 +39,6 @@ int	main(void)
 	if (init_env(&map_data, map))
 		return (1);
 
-	free_all(&map_data);
+	free_console(&map_data);
 	return (0) ;
 }
