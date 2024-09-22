@@ -6,7 +6,7 @@
 /*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/19 19:51:07 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/22 09:47:03 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@
 	# include <string.h>
 	# include <math.h>
 
+    #define PI 3.14159265359
+
 	/*==== main/utils.c ====*/
 	void	ft_perror(char *err_message);
-	void	free_all(t_map_data *map);
+    void    free_console(t_map_data *map);
+    void	free_all(t_map_data *map);
 
 	/*==== init_env/init_env.c ====*/
-	int		init_env(t_map_data *map);
+	int		init_env(t_map_data *map, char r_map[15][35]);
 
-	
+	/*==== init_env/hook.c ====*/
+    void	hook_management(t_map_data *map);
+
 #endif

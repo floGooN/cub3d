@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+         #
+#    By: florian <florian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:07:17 by fberthou          #+#    #+#              #
-#    Updated: 2024/09/19 18:27:07 by fberthou         ###   ########.fr        #
+#    Updated: 2024/09/21 16:57:55 by florian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ BUILD_PATH				= .build
 # --- COMPILATION FLAGS --- #
 LIB_FLAGS	=	-I$(LIBFT_HDR_PATH) -I$(MLX_HDR_PATH)
 MLX_FLAGS	=	-lXext -lX11 -lm -lz -Lminilibx-linux -lmlx_Linux -Lmlx_linux -L/usr/lib -Imlx_linux
-COMPFLAGS	=	-I$(HDR_PATH) $(LIB_FLAGS) -Wall -Wextra -Werror -g
+COMPFLAGS	=	-I$(HDR_PATH) $(LIB_FLAGS) -g# -Wall -Wextra -Werror
 
 SRC		=	$(MAIN_PATH)/main.c $(MAIN_PATH)/utils.c \
-			$(INIT_WIN_PATH)/init_env.c
+			$(INIT_WIN_PATH)/init_env.c $(INIT_WIN_PATH)/hook.c
 
 ### ---- TEMPORARY FILES ---- ###
 OBJ	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
