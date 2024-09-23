@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/22 17:43:05 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:28:27 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 	# include <string.h>
 	# include <math.h>
 
-	#define WIN_WIDTH 2300
-	#define WIN_HEIGHT 1500
+	#define WIN_WIDTH 1000//2300
+	#define WIN_HEIGHT 700//1500
+    #define CELL_WIDTH 10
+    #define CELL_HEIGTH 10
     #define PI 3.14159265359
 
 	/*==== main/utils.c ====*/
@@ -32,7 +34,7 @@
     void	free_all(t_map_data *map);
 
 	/*==== init_env/init_env.c ====*/
-	int		init_env(t_map_data *map, char r_map[15][35]);
+	int		init_env(t_map_data *map);
 
 	/*==== init_env/hook.c ====*/
     void	hook_management(t_map_data *map);

@@ -6,7 +6,7 @@
 #    By: florian <florian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:07:17 by fberthou          #+#    #+#              #
-#    Updated: 2024/09/21 16:57:55 by florian          ###   ########.fr        #
+#    Updated: 2024/09/22 20:43:02 by florian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(MLX)		: FORCE
 	@$(MAKE) -C $(MLX_PATH)/ all
 
 #######     OBJECTS    #######
-$(BUILD_PATH)/%.o : $(SRC_PATH)/%.c Makefile
+$(BUILD_PATH)/%.o : $(SRC_PATH)/%.c Makefile $(HDR_PATH)/*.h
 	@mkdir -p $(dir $@)
 	$(CC) $(COMPFLAGS) -c $< -o $@
 
