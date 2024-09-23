@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:20:33 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/23 10:00:05 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:14:10 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,30 @@
 void    put_player(t_map_data *map)
 {
     int p_color = 0xFF0000;
-    int radius  = 5;
-    int center_x = map->player.player_x + radius;
-    int center_y = map->player.player_y + radius;
+    double radius  = 5;
+    double center_x = map->player.player_x + radius;
+    double center_y = map->player.player_y + radius;
 
-    for (int y = 0; y < radius * 2; y++){
-		for (int x = 0; x < radius *2; x ++){
+	// put player in 2d map
+	for (int y = 0; y < radius * 2; y++){
+		for (int x = 0; x < radius * 2; x ++){
 			if (sqrt(pow(x - radius, 2) + pow(y - radius, 2)) <= radius)
-        		mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, center_x - (x - radius), center_y - (y - radius), p_color);
+				mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, center_x - (x - radius), center_y - (y - radius), p_color);
 		}
-    }
+	}
+	// put player direction
+	if (map->player.dir == NORTH){
+
+	}
+	else if (map->player.dir == SOUTH){
+
+	}
+	else if (map->player.dir == EAST){
+
+	}
+	else if (map->player.dir = WEST){
+
+	}
     return ;
 }
 
@@ -63,6 +77,43 @@ void	put_map(t_map_data *map)
     put_player(map);
 }
 
+int	update_player_pos(t_map_data *map)
+{
+	if (map->player.move_down)
+	{
+		if (map->player.player_y < 14 * CELL_WIDTH - (CELL_HEIGTH + 12))
+			map->player.player_y += SPEED;
+	}
+	if (map->player.move_up)
+	{
+		if (map->player.player_y > 0 + CELL_WIDTH)
+			map->player.player_y -= SPEED;
+	}
+	if (map->player.move_left)
+	{
+		if (map->player.player_x > 0 + CELL_WIDTH)
+			map->player.player_x -= SPEED;
+	}
+	if (map->player.move_right)
+	{
+		if (map->player.player_x < ft_strlen(map->map[0]) * CELL_WIDTH - (CELL_WIDTH + 12))
+			map->player.player_x += SPEED;
+	}
+	return (0);
+}
+
+int	loop_hook(t_map_data *map)
+{
+	if (map->player.move_down || map->player.move_up || \
+		map->player.move_left || map->player.move_right || \
+		map->player.rotate_left || map->player.rotate_right)
+	{
+		update_player_pos(map);
+		put_map(map);
+	}
+	return (0);
+}
+
 static int	init_console(t_map_data *map, int width, int height)
 {
 	map->console.mlx_ptr = mlx_init();
@@ -77,39 +128,6 @@ static int	init_console(t_map_data *map, int width, int height)
 		return (ft_perror("window initialisation\n"), 1);
 	}
 	return (0);
-}
-
-int	update_player_pos(t_map_data *map)
-{
-	double speed = 0.5;
-
-	if (map->player.move_down)
-	{
-		if (map->player.player_y < 15)
-			map->player.player_y += speed;
-	}
-	if (map->player.move_up)
-	{
-		if (map->player.player_y > 0)
-			map->player.player_y -= speed;
-	}
-	if (map->player.move_left)
-	{
-		if (map->player.player_x > 0)
-			map->player.player_x -= speed;
-	}
-	if (map->player.move_right)
-	{
-		if (map->player.player_x < 35)
-			map->player.player_x += speed;
-	}
-	return (0);
-}
-
-int	loop_hook(t_map_data *map)
-{
-	update_player_pos(map);
-	put_map(map);
 }
 
 int	init_env(t_map_data *map)

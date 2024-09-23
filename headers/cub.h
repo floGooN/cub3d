@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/23 09:28:27 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:40:31 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 	# include <string.h>
 	# include <math.h>
 
-	#define WIN_WIDTH 1000//2300
-	#define WIN_HEIGHT 700//1500
-    #define CELL_WIDTH 10
-    #define CELL_HEIGTH 10
+	#define WIN_WIDTH 1300//2300
+	#define WIN_HEIGHT 750//1500
+    #define CELL_WIDTH	30
+    #define CELL_HEIGTH	30
+	#define	SPEED		3
     #define PI 3.14159265359
 
 	/*==== main/utils.c ====*/

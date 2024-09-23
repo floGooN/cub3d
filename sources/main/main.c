@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:21:21 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/23 09:42:19 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:10:38 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(void)
         map_data.map[i] = ft_calloc(35, 1);
         ft_strcpy(map_data.map[i], map[i]);
     }
+    map_data.player.dir = NORTH;
 
 
     if (init_env(&map_data))

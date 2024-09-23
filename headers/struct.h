@@ -3,26 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:24:49 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/23 09:28:00 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/23 15:48:42 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+	typedef enum	e_playdir
+	{
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST
+	};
+
 	typedef struct	s_player
 	{
-    	double	player_x;
-		double	player_y;
-		bool	move_up;
-		bool	move_down;
-		bool	move_left;
-		bool	move_right;
-		bool	rotate_left;
-		bool	rotate_right;
+    	double			player_x;
+		double			player_y;
+		bool			move_up;
+		bool			move_down;
+		bool			move_left;
+		bool			move_right;
+		bool			rotate_left;
+		bool			rotate_right;
+		enum e_playdir	dir;
 	}	t_player;
 
 	typedef struct	s_console
