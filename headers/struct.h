@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:24:49 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/23 15:48:42 by fberthou         ###   ########.fr       */
+/*   Updated: 2024/09/24 08:55:40 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@
 		SOUTH,
 		EAST,
 		WEST
-	};
+	}   t_playdir;
 
 	typedef struct	s_player
 	{
-    	double			player_x;
-		double			player_y;
-		bool			move_up;
-		bool			move_down;
-		bool			move_left;
-		bool			move_right;
-		bool			rotate_left;
-		bool			rotate_right;
-		enum e_playdir	dir;
+		t_playdir   dir;
+    	double		dir_x;
+		double		dir_y;
+        double      pos_x;
+        double      pos_y;
+        double      angle;
+		bool		move_up;
+		bool		move_down;
+		bool		move_left;
+		bool		move_right;
+		bool		rotate_left;
+		bool		rotate_right;
 	}	t_player;
 
 	typedef struct	s_console

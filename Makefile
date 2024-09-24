@@ -6,7 +6,7 @@
 #    By: florian <florian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:07:17 by fberthou          #+#    #+#              #
-#    Updated: 2024/09/22 20:43:02 by florian          ###   ########.fr        #
+#    Updated: 2024/09/24 16:43:53 by florian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_PATH				= sources
 MAIN_PATH				= $(SRC_PATH)/main
 PARSING_PATH			= $(SRC_PATH)/parsing
 INIT_WIN_PATH			= $(SRC_PATH)/init_env
+DISPLAY_PATH			= $(SRC_PATH)/display
 
 #LIBFT#
 LIBFT_PATH				= libft
@@ -47,7 +48,8 @@ MLX_FLAGS	=	-lXext -lX11 -lm -lz -Lminilibx-linux -lmlx_Linux -Lmlx_linux -L/usr
 COMPFLAGS	=	-I$(HDR_PATH) $(LIB_FLAGS) -g# -Wall -Wextra -Werror
 
 SRC		=	$(MAIN_PATH)/main.c $(MAIN_PATH)/utils.c \
-			$(INIT_WIN_PATH)/init_env.c $(INIT_WIN_PATH)/hook.c
+			$(INIT_WIN_PATH)/init_env.c $(INIT_WIN_PATH)/hook.c \
+			$(DISPLAY_PATH)/display_game.c
 
 ### ---- TEMPORARY FILES ---- ###
 OBJ	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
