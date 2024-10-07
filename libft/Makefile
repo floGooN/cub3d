@@ -6,7 +6,7 @@
 #    By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 17:36:11 by fberthou          #+#    #+#              #
-#    Updated: 2024/09/06 12:00:05 by fberthou         ###   ########.fr        #
+#    Updated: 2024/10/07 10:13:12 by fberthou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ $(NAME) : $(OBJ)
 	@echo "$(GREEN)-- generated archive --$(RESET_COLOR)"
 
 # --- OBJECTS --- #
-$(BUILD_DIR)/%.o : $(SRC_DIR)/%.c Makefile $(HDR_DIR)
+$(BUILD_DIR)/%.o : $(SRC_DIR)/%.c Makefile $(HDR_DIR)/*.h
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 

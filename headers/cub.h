@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/24 16:43:30 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/07 10:12:05 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@
 
 	/*==== init_env/hook.c ====*/
     void	hook_management(t_map_data *map);
-
-	/*==== display/display_map.c ====*/
-    void    display_game(t_map_data *map);
 
 	#define	MOVE_DOWN(map)	\
 			if (map->player.pos_y < 14 * CELL_SIZE - (CELL_SIZE + 11)) \
