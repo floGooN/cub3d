@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 18:21:21 by fberthou          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/25 07:57:17 by florian          ###   ########.fr       */
+=======
+/*   Updated: 2024/10/07 10:13:38 by fberthou         ###   ########.fr       */
+>>>>>>> 7fee5d729aaf291df900ef50cf8302712bab6354
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +53,6 @@ int	main(void)
 
     if (init_env(&map_data))
 		return (1);
-    display_game(&map_data);
 
 
     for (int i = 0 ; i < 15; i++){
