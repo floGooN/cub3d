@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:48:56 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/24 16:43:30 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/17 19:18:15 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
     #define EAST_ANGLE  (2 * PI)
     #define WEST_ANGLE  (PI)
     #define NORTH_ANGLE (PI/2)
-    #define SOUTH_ANGLE (3*PI)/2
+    #define SOUTH_ANGLE (3 * PI)/2
 
 	/*==== main/utils.c ====*/
 	void	ft_perror(char *err_message);
@@ -48,7 +48,7 @@
 
 	#define	MOVE_DOWN(map)	\
 			if (map->player.pos_y < 14 * CELL_SIZE - (CELL_SIZE + 11)) \
-				map->player.pos_y += M_SPEED
+				map->player.pos_y += (double) M_SPEED
 
 	#define	MOVE_RIGHT(map)	\
 		if (map->player.pos_x < ft_strlen(map->map[0]) * CELL_SIZE - (CELL_SIZE + 11)) \

@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:10:20 by florian           #+#    #+#             */
-/*   Updated: 2024/09/24 16:44:59 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:56:17 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void    draw_line(t_map_data *map, int end_x, int end_y, int color)
 {
     int x = map->player.pos_x + 5;
     int y = map->player.pos_y + 5;
-    int dx = abs(end_x - x);
-    int dy = abs(end_y - y);
+    int dx = (int) fabs((double) end_x - x);
+    int dy = (int) fabs((double) end_y - y);
     int sx = (x < end_x) ? 1 : -1;
     int sy = (y < end_y) ? 1 : -1;
     int err = (dx > dy ? dx : -dy) / 2;
@@ -40,49 +40,140 @@ void    draw_line(t_map_data *map, int end_x, int end_y, int color)
 
 void    draw_rays(t_map_data *map)
 {
-    int ray_count = 60;  // Nombre de rayons à afficher (par exemple 100 rayons pour une vue en cône)
-    double ray_angle_increment = (M_PI / 3) / ray_count; // Incrément d'angle entre chaque rayon (60 degrés de champ de vision)
-    double ray_angle;
-    double ray_x;
-    double ray_y;
     int end_x, end_y;
+	int map_x, map_y;
 
-    // Dessin de chaque rayon
-    for (int i = 0; i < ray_count; i++)
+	map->data_ray.nb_ray = 60; // Nombre de rayons à afficher (par exemple 60 rayons pour une vue en cône)
+	map->data_ray.fov = (M_PI / 3) / map->data_ray.nb_ray;  // Incrément d'angle entre chaque rayon (60 degrés de champ de vision)
+	map->data_ray.max_ray_length = ft_strlen(map->map[0]);
+
+    for (int i = 0; i < map->data_ray.nb_ray; i++)
     {
-        ray_angle = map->player.angle - (M_PI / 6) + i * ray_angle_increment; // Angle de chaque rayon
-        ray_x = cos(ray_angle);  // Calcul de la direction en X
-        ray_y = sin(ray_angle);  // Calcul de la direction en Y
+        map->data_ray.ray_angle = map->player.angle - (M_PI / 6) + i * map->data_ray.fov; // Angle de chaque rayon
+        map->data_ray.ray_dir_x = cos(map->data_ray.ray_angle);  // Direction du rayon en X
+        map->data_ray.ray_dir_y = sin(map->data_ray.ray_angle);  // Direction du rayon en Y
 
-        // On "projette" le rayon jusqu'à rencontrer un mur ou une limite
-        double distance = 0;
-        int hit_wall = 0;
-        while (hit_wall == 0 && distance < 50) // Limite de distance pour éviter une boucle infinie
+        // Position actuelle dans la grille
+        int grid_x = (int)map->player.pos_x / CELL_SIZE;
+        int grid_y = (int)map->player.pos_y / CELL_SIZE;
+
+        // Distance du rayon à la prochaine ligne verticale et horizontale
+        double deltaDistX = fabs(1 / map->data_ray.ray_dir_x);
+        double deltaDistY = fabs(1 / map->data_ray.ray_dir_y);
+
+        // Variables pour DDA
+        double sideDistX, sideDistY;
+        int stepX, stepY;
+
+        // Initialisation des pas et de la distance initiale aux premières lignes verticales/horizontales
+        if (map->data_ray.ray_dir_x < 0)
         {
-            distance += 0.1; // Avancer de petits pas pour tester la collision
-            end_x = (int)(map->player.pos_x + ray_x * distance * CELL_SIZE);
-            end_y = (int)(map->player.pos_y + ray_y * distance * CELL_SIZE);
-
-            // On vérifie si le rayon touche un mur
-            int map_x = end_x / CELL_SIZE;
-            int map_y = end_y / CELL_SIZE;
-            if (map->map[map_y][map_x] == '1')
-                hit_wall = 1;
-
-            // Afficher le rayon si pas encore de collision
-            if (!hit_wall)
-                mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, end_x, end_y, 0x00FF00); // Vert pour le rayon
+            stepX = -1;
+            sideDistX = (map->player.pos_x / CELL_SIZE - grid_x) * deltaDistX;
+        }
+        else
+        {
+            stepX = 1;
+            sideDistX = (grid_x + 1.0 - map->player.pos_x / CELL_SIZE) * deltaDistX;
         }
 
-        // Une fois que le rayon touche un mur, on dessine une ligne complète pour ce rayon
+        if (map->data_ray.ray_dir_y < 0)
+        {
+            stepY = -1;
+            sideDistY = (map->player.pos_y / CELL_SIZE - grid_y) * deltaDistY;
+        }
+        else
+        {
+            stepY = 1;
+            sideDistY = (grid_y + 1.0 - map->player.pos_y / CELL_SIZE) * deltaDistY;
+        }
+
+        int hit = 0; // Flag pour savoir si le rayon touche un mur
+        int side;    // Pour savoir si c'est une collision sur une ligne verticale ou horizontale
+
+        // Algorithme DDA : on avance dans la grille jusqu'à toucher un mur
+        while (hit == 0)
+        {
+            // Choisir si on avance sur l'axe X ou Y en fonction de la distance la plus courte
+            if (sideDistX < sideDistY)
+            {
+                sideDistX += deltaDistX;
+                grid_x += stepX;
+                side = 0; // Collision sur une ligne verticale
+            }
+            else
+            {
+                sideDistY += deltaDistY;
+                grid_y += stepY;
+                side = 1; // Collision sur une ligne horizontale
+            }
+
+            // Vérification de la collision avec un mur
+            if (map->map[grid_y][grid_x] == '1')
+                hit = 1;
+        }
+
+        // Calcul de la distance à laquelle le mur est touché
+        double perpWallDist;
+        if (side == 0)
+            perpWallDist = (grid_x - map->player.pos_x / CELL_SIZE + (1 - stepX) / 2) / map->data_ray.ray_dir_x;
+        else
+            perpWallDist = (grid_y - map->player.pos_y / CELL_SIZE + (1 - stepY) / 2) / map->data_ray.ray_dir_y;
+
+        // Calcul des coordonnées finales pour dessiner le rayon
+        end_x = map->player.pos_x + map->data_ray.ray_dir_x * perpWallDist * CELL_SIZE;
+        end_y = map->player.pos_y + map->data_ray.ray_dir_y * perpWallDist * CELL_SIZE;
+
+        // Dessiner la ligne du rayon
         draw_line(map, end_x, end_y, 0x00FF00); // Vert pour la ligne complète du rayon
     }
 }
 
-void    put_player(t_map_data *map)
+
+// void    draw_rays(t_map_data *map)
+// {
+//     double	distance;
+// 	int		end_x, end_y;
+// 	int		map_x, map_y;
+
+// 	map->data_ray.nb_ray = 60; // Nombre de rayons à afficher (par exemple 60 rayons pour une vue en cône)
+// 	map->data_ray.fov = (M_PI / 3) / map->data_ray.nb_ray;  // Incrément d'angle entre chaque rayon (60 degrés de champ de vision)
+// 	map->data_ray.max_ray_length = ft_strlen(map->map[0]);
+//     // Dessin de chaque rayon
+//     for (int i = 0; i < map->data_ray.nb_ray; i++)
+//     {
+//         map->data_ray.ray_angle = map->player.angle - (M_PI / 6) + i * map->data_ray.fov; // Angle de chaque rayon
+//         map->data_ray.ray_dir_x = cos(map->data_ray.ray_angle);  // Calcul de la direction en X
+//         map->data_ray.ray_dir_y = sin(map->data_ray.ray_angle);  // Calcul de la direction en Y
+
+//         // On "projette" le rayon jusqu'à rencontrer un mur ou une limite
+//         distance = 0;
+// 		map->data_ray.hit_wall = 0;
+//         while (map->data_ray.hit_wall == 0 && distance < map->data_ray.max_ray_length) // Limite de distance pour éviter une boucle infinie
+//         {
+//             distance += 0.1; // Avancer de petits pas pour tester la collision    !!! critic part !!!! we have to check only on intersections of the grid
+//             end_x = (int)((map->player.pos_x + 5) + map->data_ray.ray_dir_x * distance * CELL_SIZE);
+//             end_y = (int)((map->player.pos_y + 5) + map->data_ray.ray_dir_y * distance * CELL_SIZE);
+
+//             // On vérifie si le rayon touche un mur
+//             map_x = end_x / CELL_SIZE;
+//             map_y = end_y / CELL_SIZE;
+//             if (map->map[map_y][map_x] == '1')
+//                 map->data_ray.hit_wall = 1;
+
+//             // Afficher le rayon si pas encore de collision
+//             if (!map->data_ray.hit_wall)
+//                 mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, end_x, end_y, 0x00FF00); // Vert pour le rayon
+//         }
+//         // Une fois que le rayon touche un mur, on dessine une ligne complète pour ce rayon
+//         draw_line(map, end_x, end_y, 0x00FF00); // Vert pour la ligne complète du rayon
+//     }
+// }
+
+void    draw_player(t_map_data *map)
 {
-    int     p_color     = 0xFF0000;
-    double  radius   = 5;
+    int     p_color = 0xFF0000;
+    double  radius = 5;
     double  center_x = map->player.pos_x + radius;
     double  center_y = map->player.pos_y + radius;
 
@@ -108,7 +199,7 @@ void	draw_map(t_map_data *map, int color, int start_y, int start_x)
     while(i < CELL_SIZE)
     {
 		mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, start_x + i, \
-                        start_y, color);
+						start_y, color);
         while (j < CELL_SIZE)
         {
 			mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, \
@@ -129,9 +220,9 @@ void	put_map(t_map_data *map)
 
     y = 0;
     x = 0;
-    while (y < 15)
+    while (y < 15) // y < map height
     {
-        while (x < 35)
+        while (x < 35) // x < map width
         {
             if (map->map[y][x] == '1')
                 color = 0xFFFFFF; // white for walls
@@ -143,7 +234,7 @@ void	put_map(t_map_data *map)
         x = 0;
         y++;
     }
-    put_player(map);
+    draw_player(map);
     return ;
 }
 

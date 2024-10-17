@@ -6,7 +6,7 @@
 /*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:20:33 by fberthou          #+#    #+#             */
-/*   Updated: 2024/09/24 12:28:43 by florian          ###   ########.fr       */
+/*   Updated: 2024/09/25 07:59:22 by florian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void    init_player(t_map_data *map)
 {
-    map->player.pos_x = 26 * CELL_SIZE;
-    map->player.pos_y = 11 * CELL_SIZE;
+    map->player.pos_x = 31 * CELL_SIZE;
+    map->player.pos_y = 3 * CELL_SIZE;
 	if (map->player.dir == NORTH)
     {
         INIT_PLAYER(0, -1, 3 * M_PI_2);
