@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: florian <florian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 12:10:20 by florian           #+#    #+#             */
-/*   Updated: 2024/09/25 09:56:17 by florian          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:39:12 by fberthou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void    draw_rays(t_map_data *map)
 
 	map->data_ray.nb_ray = 60; // Nombre de rayons à afficher (par exemple 60 rayons pour une vue en cône)
 	map->data_ray.fov = (M_PI / 3) / map->data_ray.nb_ray;  // Incrément d'angle entre chaque rayon (60 degrés de champ de vision)
-	map->data_ray.max_ray_length = ft_strlen(map->map[0]);
 
     for (int i = 0; i < map->data_ray.nb_ray; i++)
     {
@@ -129,46 +128,6 @@ void    draw_rays(t_map_data *map)
     }
 }
 
-
-// void    draw_rays(t_map_data *map)
-// {
-//     double	distance;
-// 	int		end_x, end_y;
-// 	int		map_x, map_y;
-
-// 	map->data_ray.nb_ray = 60; // Nombre de rayons à afficher (par exemple 60 rayons pour une vue en cône)
-// 	map->data_ray.fov = (M_PI / 3) / map->data_ray.nb_ray;  // Incrément d'angle entre chaque rayon (60 degrés de champ de vision)
-// 	map->data_ray.max_ray_length = ft_strlen(map->map[0]);
-//     // Dessin de chaque rayon
-//     for (int i = 0; i < map->data_ray.nb_ray; i++)
-//     {
-//         map->data_ray.ray_angle = map->player.angle - (M_PI / 6) + i * map->data_ray.fov; // Angle de chaque rayon
-//         map->data_ray.ray_dir_x = cos(map->data_ray.ray_angle);  // Calcul de la direction en X
-//         map->data_ray.ray_dir_y = sin(map->data_ray.ray_angle);  // Calcul de la direction en Y
-
-//         // On "projette" le rayon jusqu'à rencontrer un mur ou une limite
-//         distance = 0;
-// 		map->data_ray.hit_wall = 0;
-//         while (map->data_ray.hit_wall == 0 && distance < map->data_ray.max_ray_length) // Limite de distance pour éviter une boucle infinie
-//         {
-//             distance += 0.1; // Avancer de petits pas pour tester la collision    !!! critic part !!!! we have to check only on intersections of the grid
-//             end_x = (int)((map->player.pos_x + 5) + map->data_ray.ray_dir_x * distance * CELL_SIZE);
-//             end_y = (int)((map->player.pos_y + 5) + map->data_ray.ray_dir_y * distance * CELL_SIZE);
-
-//             // On vérifie si le rayon touche un mur
-//             map_x = end_x / CELL_SIZE;
-//             map_y = end_y / CELL_SIZE;
-//             if (map->map[map_y][map_x] == '1')
-//                 map->data_ray.hit_wall = 1;
-
-//             // Afficher le rayon si pas encore de collision
-//             if (!map->data_ray.hit_wall)
-//                 mlx_pixel_put(map->console.mlx_ptr, map->console.win_ptr, end_x, end_y, 0x00FF00); // Vert pour le rayon
-//         }
-//         // Une fois que le rayon touche un mur, on dessine une ligne complète pour ce rayon
-//         draw_line(map, end_x, end_y, 0x00FF00); // Vert pour la ligne complète du rayon
-//     }
-// }
 
 void    draw_player(t_map_data *map)
 {

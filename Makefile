@@ -6,7 +6,7 @@
 #    By: fberthou <fberthou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:07:17 by fberthou          #+#    #+#              #
-#    Updated: 2024/10/07 10:14:16 by fberthou         ###   ########.fr        #
+#    Updated: 2024/10/22 11:22:57 by fberthou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ COMPFLAGS	=	-I$(HDR_PATH) $(LIB_FLAGS) -g# -Wall -Wextra -Werror
 
 SRC		=	$(MAIN_PATH)/main.c $(MAIN_PATH)/utils.c \
 			$(INIT_WIN_PATH)/init_env.c $(INIT_WIN_PATH)/hook.c \
+			$(DISPLAY_PATH)/display_game.c
 
 ### ---- TEMPORARY FILES ---- ###
 OBJ	= $(SRC:$(SRC_PATH)/%.c=$(BUILD_PATH)/%.o)
